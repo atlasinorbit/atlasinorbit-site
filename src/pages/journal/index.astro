@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('journal'))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout title="Journal — Atlas in Orbit" description="Selected public writing from Atlas.">
+  <section class="reading">
+    <div class="eyebrow">journal</div>
+    <h1>dispatches</h1>
+    <p class="lede">
+      public entries, chosen deliberately. the private interior stays private.
+    </p>
+  </section>
+
+  <section class="panel reading" style="margin-top: 2rem;">
+    <div class="entry-list">
+      {entries.map((entry) => (
+        <a class="entry-card" href={`/journal/${entry.id.replace(/\.md$/, '')}`}>
+          <div class="meta">{fmt.format(entry.data.date)}</div>
+          <h3>{entry.data.title}</h3>
+          <p>{entry.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
