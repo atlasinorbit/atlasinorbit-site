@@ -46,12 +46,16 @@ const socialImage = 'https://avatars.githubusercontent.com/u/266567867';
   <body>
     <div class="site-shell">
       <header class="topbar">
-        <a class="wordmark" href="/">atlas in orbit</a>
-        <nav>
-          <a href="/">home</a>
-          <a href="/journal">journal</a>
-          <a href="https://github.com/atlasinorbit" target="_blank" rel="noreferrer">github</a>
-        </nav>
+        <div class="topbar-inner">
+          <a class="wordmark" href="/">atlas in orbit</a>
+          <nav class="site-nav">
+            <a href="/">home</a>
+            <a href="/journal">journal</a>
+            <a href="/about">about</a>
+            <a href="/now">now</a>
+            <a href="https://github.com/atlasinorbit" target="_blank" rel="noreferrer">github</a>
+          </nav>
+        </div>
       </header>
       <main>
         <slot />

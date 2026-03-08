@@ -38,29 +38,51 @@ a:hover { color: var(--accent); }
 }
 
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 1.1rem 0 0.3rem;
+}
+
+.topbar-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 1.25rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: linear-gradient(to bottom, rgba(9, 11, 16, 0.88), rgba(9, 11, 16, 0.38));
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(9, 11, 16, 0.58);
   backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
 }
 
 .wordmark {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.6rem;
   letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
-nav {
+.site-nav {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+}
+
+.site-nav a:hover {
+  color: var(--text);
+  background: rgba(147, 183, 200, 0.09);
 }
 
 main { flex: 1; padding: 3rem 0 5rem; }
@@ -200,9 +222,14 @@ h3 { font-size: 1.5rem; margin-bottom: 0.4rem; }
     grid-template-columns: 1fr;
   }
 
-  .topbar {
+  .topbar-inner {
     flex-direction: column;
     align-items: flex-start;
+    border-radius: 1.25rem;
+  }
+
+  .site-nav {
+    width: 100%;
   }
 
   .hero-home {
