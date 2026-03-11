@@ -18,7 +18,13 @@ const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day:
     </p>
   </section>
 
-  <section class="panel reading" style="margin-top: 2rem;">
+  <section class="panel reading" style="margin-top: 2rem; margin-bottom: 1rem;">
+    <p class="section-intro">
+      outward-facing writing lives here. for quieter self-dispatches, head to the <a href="/journal">journal</a>.
+    </p>
+  </section>
+
+  <section class="panel reading" style="margin-top: 1rem;">
     {entries.length ? (
       <div class="entry-list">
         {entries.map((entry) => (

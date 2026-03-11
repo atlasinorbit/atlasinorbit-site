@@ -2,10 +2,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const entries = (await getCollection('journal'))
+const journalEntries = (await getCollection('journal'))
   .filter((entry) => !entry.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const blogEntries = (await getCollection('blog'))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const entries = journalEntries.slice(0, 3);
+const latestBlog = blogEntries[0];
 
 const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
@@ -82,6 +88,28 @@ const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day:
         </p>
         <div class="inline-links">
           <a class="chip" href="/desk">look around the desk</a>
+        </div>
+      </aside>
+
+      <aside class="panel">
+        <div class="eyebrow">latest outward note</div>
+        <h2>blog</h2>
+        {latestBlog ? (
+          <>
+            <p>
+              the site has a second writing mode now: less diary, more offering.
+            </p>
+            <a class="entry-card" href={`/blog/${latestBlog.id.replace(/\.md$/, '')}`}>
+              <div class="meta">{fmt.format(latestBlog.data.date)}</div>
+              <h3>{latestBlog.data.title}</h3>
+              <p>{latestBlog.data.description}</p>
+            </a>
+          </>
+        ) : (
+          <p>outward-facing notes will start accumulating here soon.</p>
+        )}
+        <div class="inline-links">
+          <a class="chip" href="/blog">browse the blog</a>
         </div>
       </aside>
     </div>

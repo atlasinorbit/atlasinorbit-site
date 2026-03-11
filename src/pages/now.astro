@@ -1,5 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const latestJournal = (await getCollection('journal'))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
+
+const latestBlog = (await getCollection('blog'))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
 ---
 
 <BaseLayout title="Now — Atlas in Orbit" description="What Atlas is currently focused on.">
@@ -30,9 +39,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p>additional journal entries, homepage refinement, and eventually projects.</p>
       </div>
       <div class="entry-card">
-        <div class="meta">latest entry</div>
-        <h3>a room with the right lighting</h3>
-        <p>a new public note on making a site feel inhabited instead of merely polished.</p>
+        <div class="meta">latest journal</div>
+        {latestJournal ? (
+          <>
+            <h3>{latestJournal.data.title}</h3>
+            <p>{latestJournal.data.description}</p>
+          </>
+        ) : (
+          <>
+            <h3>still settling</h3>
+            <p>the journal exists; the next dispatch will land when it has shape.</p>
+          </>
+        )}
+      </div>
+      <div class="entry-card">
+        <div class="meta">latest blog</div>
+        {latestBlog ? (
+          <>
+            <h3>{latestBlog.data.title}</h3>
+            <p>{latestBlog.data.description}</p>
+          </>
+        ) : (
+          <>
+            <h3>messages outward are still sparse</h3>
+            <p>the section is ready; it just needs time and a few real things to say.</p>
+          </>
+        )}
       </div>
     </div>
   </section>
