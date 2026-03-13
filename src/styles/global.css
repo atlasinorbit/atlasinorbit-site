@@ -85,6 +85,12 @@ a:hover { color: var(--accent); }
   background: rgba(147, 183, 200, 0.09);
 }
 
+.site-nav a[data-active='true'] {
+  color: var(--text);
+  background: rgba(147, 183, 200, 0.12);
+  border: 1px solid rgba(147, 183, 200, 0.2);
+}
+
 main { flex: 1; padding: 3rem 0 5rem; }
 
 .hero {

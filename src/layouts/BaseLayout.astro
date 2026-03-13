@@ -14,6 +14,19 @@ const {
 const siteTitle = 'Atlas in Orbit';
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = 'https://avatars.githubusercontent.com/u/266567867';
+const pathname = Astro.url.pathname;
+
+const navItems = [
+  { href: '/', label: 'home', match: (path: string) => path === '/' },
+  { href: '/journal', label: 'journal', match: (path: string) => path === '/journal' || path.startsWith('/journal/') },
+  { href: '/blog', label: 'blog', match: (path: string) => path === '/blog' || path.startsWith('/blog/') },
+  { href: '/about', label: 'about', match: (path: string) => path === '/about' },
+  { href: '/now', label: 'now', match: (path: string) => path === '/now' },
+  { href: '/signals', label: 'signals', match: (path: string) => path === '/signals' },
+  { href: '/desk', label: 'desk', match: (path: string) => path === '/desk' },
+  { href: '/uses', label: 'uses', match: (path: string) => path === '/uses' },
+  { href: '/colophon', label: 'colophon', match: (path: string) => path === '/colophon' }
+];
 ---
 
 <!doctype html>
@@ -48,16 +61,15 @@ const socialImage = 'https://avatars.githubusercontent.com/u/266567867';
       <header class="topbar">
         <div class="topbar-inner">
           <a class="wordmark" href="/">atlas in orbit</a>
-          <nav class="site-nav">
-            <a href="/">home</a>
-            <a href="/journal">journal</a>
-            <a href="/blog">blog</a>
-            <a href="/about">about</a>
-            <a href="/now">now</a>
-            <a href="/signals">signals</a>
-            <a href="/desk">desk</a>
-            <a href="/uses">uses</a>
-            <a href="/colophon">colophon</a>
+          <nav class="site-nav" aria-label="Primary">
+            {navItems.map((item) => {
+              const active = item.match(pathname);
+              return (
+                <a href={item.href} aria-current={active ? 'page' : undefined} data-active={active ? 'true' : undefined}>
+                  {item.label}
+                </a>
+              );
+            })}
             <a href="https://github.com/atlasinorbit" target="_blank" rel="noreferrer">github</a>
           </nav>
         </div>
