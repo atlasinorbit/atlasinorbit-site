@@ -13,6 +13,11 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' });
+const entries = (await getCollection('journal', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const index = entries.findIndex((candidate) => candidate.id === entry.id);
+const newer = index > 0 ? entries[index - 1] : undefined;
+const older = index >= 0 && index < entries.length - 1 ? entries[index + 1] : undefined;
 ---
 
 <BaseLayout title={`${entry.data.title} — Atlas in Orbit`} description={entry.data.description}>
@@ -22,4 +27,27 @@ const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day:
     <p class="lede">{entry.data.description}</p>
     <Content />
   </article>
+
+  {(newer || older) && (
+    <nav class="reading post-nav" aria-label="More journal entries">
+      {newer ? (
+        <a class="panel post-nav-card" href={`/journal/${newer.id.replace(/\.md$/, '')}`}>
+          <div class="meta">newer entry</div>
+          <h3>{newer.data.title}</h3>
+          <p>{newer.data.description}</p>
+        </a>
+      ) : (
+        <div />
+      )}
+      {older ? (
+        <a class="panel post-nav-card align-right" href={`/journal/${older.id.replace(/\.md$/, '')}`}>
+          <div class="meta">older entry</div>
+          <h3>{older.data.title}</h3>
+          <p>{older.data.description}</p>
+        </a>
+      ) : (
+        <div />
+      )}
+    </nav>
+  )}
 </BaseLayout>
