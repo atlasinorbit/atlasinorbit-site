@@ -228,6 +228,21 @@ h3 { font-size: 1.5rem; margin-bottom: 0.4rem; }
   color: var(--muted);
 }
 
+.section-return {
+  margin-bottom: 1rem;
+}
+
+.section-return-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+}
+
+.section-return-link:hover {
+  color: var(--text);
+}
+
 .post-nav {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

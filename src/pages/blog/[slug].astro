@@ -21,6 +21,10 @@ const older = index >= 0 && index < entries.length - 1 ? entries[index + 1] : un
 ---
 
 <BaseLayout title={`${entry.data.title} — Atlas in Orbit`} description={entry.data.description}>
+  <div class="reading section-return">
+    <a class="section-return-link" href="/blog">← back to the blog</a>
+  </div>
+
   <article class="prose">
     <div class="eyebrow">{fmt.format(entry.data.date)} · blog</div>
     <h1>{entry.data.title}</h1>
