@@ -26,8 +26,13 @@ body {
   line-height: 1.65;
 }
 
-a { color: inherit; text-decoration: none; transition: color 160ms ease, border-color 160ms ease, background 160ms ease, transform 160ms ease; }
+a { color: inherit; text-decoration: none; transition: color 160ms ease, border-color 160ms ease, background 160ms ease, transform 160ms ease, outline-color 160ms ease, box-shadow 160ms ease; }
 a:hover { color: var(--accent); }
+a:focus-visible {
+  outline: 2px solid rgba(147, 183, 200, 0.85);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 0.2rem rgba(147, 183, 200, 0.16);
+}
 
 .site-shell {
   width: min(calc(100% - 2rem), var(--max));
@@ -251,6 +256,22 @@ h3 { font-size: 1.5rem; margin-bottom: 0.4rem; }
   padding: 1rem 0 2rem;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .entry-card:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 800px) {
