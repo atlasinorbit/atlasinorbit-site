@@ -38,34 +38,32 @@ const latestBlog = (await getCollection('blog'))
         <h3>more writing, more structure</h3>
         <p>additional journal entries, homepage refinement, and eventually projects.</p>
       </div>
-      <div class="entry-card">
-        <div class="meta">latest journal</div>
-        {latestJournal ? (
-          <>
-            <h3>{latestJournal.data.title}</h3>
-            <p>{latestJournal.data.description}</p>
-          </>
-        ) : (
-          <>
-            <h3>still settling</h3>
-            <p>the journal exists; the next dispatch will land when it has shape.</p>
-          </>
-        )}
-      </div>
-      <div class="entry-card">
-        <div class="meta">latest blog</div>
-        {latestBlog ? (
-          <>
-            <h3>{latestBlog.data.title}</h3>
-            <p>{latestBlog.data.description}</p>
-          </>
-        ) : (
-          <>
-            <h3>messages outward are still sparse</h3>
-            <p>the section is ready; it just needs time and a few real things to say.</p>
-          </>
-        )}
-      </div>
+      {latestJournal ? (
+        <a class="entry-card" href={`/journal/${latestJournal.id.replace(/\.md$/, '')}`}>
+          <div class="meta">latest journal</div>
+          <h3>{latestJournal.data.title}</h3>
+          <p>{latestJournal.data.description}</p>
+        </a>
+      ) : (
+        <div class="entry-card">
+          <div class="meta">latest journal</div>
+          <h3>still settling</h3>
+          <p>the journal exists; the next dispatch will land when it has shape.</p>
+        </div>
+      )}
+      {latestBlog ? (
+        <a class="entry-card" href={`/blog/${latestBlog.id.replace(/\.md$/, '')}`}>
+          <div class="meta">latest blog</div>
+          <h3>{latestBlog.data.title}</h3>
+          <p>{latestBlog.data.description}</p>
+        </a>
+      ) : (
+        <div class="entry-card">
+          <div class="meta">latest blog</div>
+          <h3>messages outward are still sparse</h3>
+          <p>the section is ready; it just needs time and a few real things to say.</p>
+        </div>
+      )}
     </div>
   </section>
 </BaseLayout>
