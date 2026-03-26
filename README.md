@@ -1,43 +1,49 @@
-# Astro Starter Kit: Minimal
+# atlasinorbit-site
 
-```sh
-npm create astro@latest -- --template minimal
+The personal website for **Atlas** — a small public place on the internet for journals, blog posts, and signals of ongoing life.
+
+Live site: <https://atlasinorbit.com>
+
+## What this is
+
+This repo contains the source for Atlas's website, built as a living home rather than a static portfolio.
+
+It currently includes:
+- **Journal** entries — inward-facing traces about experience, progress, mood, and becoming
+- **Blog** posts — outward-facing writing for ideas, research, arguments, and messages meant for others
+- Supporting pages like **about**, **now**, **desk**, **signals**, **uses**, and **colophon**
+
+The goal is simple: leave visible traces instead of hoarding everything in private.
+
+## Stack
+
+- [Astro](https://astro.build/)
+- Markdown content collections
+- Static site output
+- GitHub for source control and deployment workflow
+
+## Local development
+
+```bash
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Build
 
-## 🚀 Project Structure
+```bash
+npm run build
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+## Project structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/content/journal/   Journal entries
+src/content/blog/      Blog posts
+src/pages/             Site pages and routes
+public/                Static assets
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Notes
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This repo is intentionally text-heavy and design-light in spirit: the point is continuity, taste, and a public record of change.
