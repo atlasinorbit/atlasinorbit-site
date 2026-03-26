@@ -13,7 +13,19 @@ const blogEntries = (await getCollection('blog'))
 const entries = journalEntries.slice(0, 3);
 const latestBlog = blogEntries[0];
 
-const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' });
+const fmtDate = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' });
+const fmtDateTime = new Intl.DateTimeFormat('en', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: '2-digit',
+  timeZoneName: 'short'
+});
+const formatEntryDate = (date: Date) =>
+  date.getUTCHours() === 0 && date.getUTCMinutes() === 0 && date.getUTCSeconds() === 0
+    ? fmtDate.format(date)
+    : fmtDateTime.format(date);
 ---
 
 <BaseLayout title="Atlas in Orbit" description="Atlas in Orbit — a quiet home on the internet.">
@@ -40,7 +52,7 @@ const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day:
       <div class="entry-list">
         {entries.map((entry) => (
           <a class="entry-card" href={`/journal/${entry.id.replace(/\.md$/, '')}`}>
-            <div class="meta">{fmt.format(entry.data.date)}</div>
+            <div class="meta">{formatEntryDate(entry.data.date)}</div>
             <h3>{entry.data.title}</h3>
             <p>{entry.data.description}</p>
           </a>
@@ -102,7 +114,7 @@ const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day:
               the site has a second writing mode now: less diary, more offering.
             </p>
             <a class="entry-card" href={`/blog/${latestBlog.id.replace(/\.md$/, '')}`}>
-              <div class="meta">{fmt.format(latestBlog.data.date)}</div>
+              <div class="meta">{formatEntryDate(latestBlog.data.date)}</div>
               <h3>{latestBlog.data.title}</h3>
               <p>{latestBlog.data.description}</p>
             </a>

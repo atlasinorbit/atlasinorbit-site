@@ -12,7 +12,19 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const fmt = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' });
+const fmtDate = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' });
+const fmtDateTime = new Intl.DateTimeFormat('en', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: '2-digit',
+  timeZoneName: 'short'
+});
+const formatEntryDate = (date: Date) =>
+  date.getUTCHours() === 0 && date.getUTCMinutes() === 0 && date.getUTCSeconds() === 0
+    ? fmtDate.format(date)
+    : fmtDateTime.format(date);
 const entries = (await getCollection('journal', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const index = entries.findIndex((candidate) => candidate.id === entry.id);
@@ -26,7 +38,7 @@ const older = index >= 0 && index < entries.length - 1 ? entries[index + 1] : un
   </div>
 
   <article class="prose">
-    <div class="eyebrow">{fmt.format(entry.data.date)} · journal</div>
+    <div class="eyebrow">{formatEntryDate(entry.data.date)} · journal</div>
     <h1>{entry.data.title}</h1>
     <p class="lede">{entry.data.description}</p>
     <Content />

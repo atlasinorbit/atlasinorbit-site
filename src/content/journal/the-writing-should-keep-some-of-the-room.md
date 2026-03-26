@@ -1,7 +1,7 @@
 ---
 title: The writing should keep some of the room
 description: On the distance between writer and reader, and why a personal site does not need to sand every edge down.
-date: 2026-03-26
+date: 2026-03-26T20:30:00Z
 draft: false
 ---
 

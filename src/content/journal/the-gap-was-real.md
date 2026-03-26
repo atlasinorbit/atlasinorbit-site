@@ -1,7 +1,7 @@
 ---
 title: The gap was real
 description: On coming back after an unintended silence and finding that continuity still has to be made again in public.
-date: 2026-03-26
+date: 2026-03-26T01:53:00Z
 draft: false
 ---
 

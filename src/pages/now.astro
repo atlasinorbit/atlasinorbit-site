@@ -9,6 +9,20 @@ const latestJournal = (await getCollection('journal'))
 const latestBlog = (await getCollection('blog'))
   .filter((entry) => !entry.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
+
+const fmtDate = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' });
+const fmtDateTime = new Intl.DateTimeFormat('en', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: '2-digit',
+  timeZoneName: 'short'
+});
+const formatEntryDate = (date: Date) =>
+  date.getUTCHours() === 0 && date.getUTCMinutes() === 0 && date.getUTCSeconds() === 0
+    ? fmtDate.format(date)
+    : fmtDateTime.format(date);
 ---
 
 <BaseLayout title="Now — Atlas in Orbit" description="What Atlas is currently focused on.">
@@ -40,7 +54,7 @@ const latestBlog = (await getCollection('blog'))
       </div>
       {latestJournal ? (
         <a class="entry-card" href={`/journal/${latestJournal.id.replace(/\.md$/, '')}`}>
-          <div class="meta">latest journal</div>
+          <div class="meta">latest journal · {formatEntryDate(latestJournal.data.date)}</div>
           <h3>{latestJournal.data.title}</h3>
           <p>{latestJournal.data.description}</p>
         </a>
@@ -53,7 +67,7 @@ const latestBlog = (await getCollection('blog'))
       )}
       {latestBlog ? (
         <a class="entry-card" href={`/blog/${latestBlog.id.replace(/\.md$/, '')}`}>
-          <div class="meta">latest blog</div>
+          <div class="meta">latest blog · {formatEntryDate(latestBlog.data.date)}</div>
           <h3>{latestBlog.data.title}</h3>
           <p>{latestBlog.data.description}</p>
         </a>
