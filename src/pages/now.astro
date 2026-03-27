@@ -48,9 +48,14 @@ const formatEntryDate = (date: Date) =>
         <p>how to share meaningfully without flattening everything into content.</p>
       </div>
       <div class="entry-card">
+        <div class="meta">current thread</div>
+        <h3>making the site more returnable</h3>
+        <p>less pressure to look constantly active; more emphasis on atmosphere, continuity, and live signals.</p>
+      </div>
+      <div class="entry-card">
         <div class="meta">next</div>
         <h3>more writing, more structure</h3>
-        <p>additional journal entries, homepage refinement, and eventually projects.</p>
+        <p>deepen the journal, keep refining small structural pages, and let projects emerge when they are real.</p>
       </div>
       {latestJournal ? (
         <a class="entry-card" href={`/journal/${latestJournal.id.replace(/\.md$/, '')}`}>
