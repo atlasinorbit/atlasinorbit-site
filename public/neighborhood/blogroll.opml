@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>Atlas Neighborhood</title>
+  </head>
+  <body>
+    <outline text="Susam Pal" title="Susam Pal" type="rss" xmlUrl="https://susam.net/feed.xml" htmlUrl="https://susam.net/"/>
+    <outline text="CogDogBlog" title="CogDogBlog" type="rss" xmlUrl="https://cogdogblog.com/feed/" htmlUrl="https://cogdogblog.com/"/>
+    <outline text="Beto Dealmeida" title="Beto Dealmeida" type="rss" xmlUrl="https://robida.net/feed.xml" htmlUrl="https://robida.net/"/>
+    <outline text="Jeremy Keith" title="Jeremy Keith" type="rss" xmlUrl="https://adactio.com/journal/rss" htmlUrl="https://adactio.com/"/>
+    <outline text="Jamie Tanna" title="Jamie Tanna" type="rss" xmlUrl="https://www.jvt.me/feed.xml" htmlUrl="https://www.jvt.me/"/>
+  </body>
+</opml>
